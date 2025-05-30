@@ -21,7 +21,5 @@
 
     # Servir a aplicação no ambiente local
     $ composer run dev
-
-```
 ```
 ```
