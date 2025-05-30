@@ -16,9 +16,9 @@ return new class extends Migration
             $table->timestamps();
             $table->text('modelo');
             $table->text('marca');
-            $table->integer('ano');
             $table->text('status');
             $table->text('imagem');
+            $table->integer('ano');
         });
     }
 
