@@ -15,7 +15,7 @@ new class extends Component
      * Mount the component.
      */
     public function mount(): void
-    {
+
         $this->name = Auth::user()->name;
         $this->email = Auth::user()->email;
     }

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -19,6 +20,7 @@ return new class extends Migration
             $table->text('status');
             $table->text('imagem');
             $table->integer('ano');
+            $table->foreignId('user_id')->references('id')->on('users');
         });
     }
 

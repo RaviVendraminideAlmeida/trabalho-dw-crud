@@ -10,27 +10,35 @@ new class extends Component {
 
     use WithFileUploads;
 
+    public $id;
+    public $carro;
+
     public $modelo, $marca, $status;
-
     public int $ano;
-
     public $imagem;
 
     public function mount()
     {
-        $this->modelo = '';
-        $this->marca = 'Fiat';  // Valor padrão para marca
-        $this->status = 'Livre'; // Valor padrão para status
-        $this->ano = date('Y');
+        $this->carro = Carro::find($this->id);
+
+        if ($this->carro->user != Auth::user()) {
+            session()->flash('error', 'Não é possível realizar a alteração do carro de outro usuário');
+            return redirect()->to(route('dashboard'));
+        }
+
+        $this->modelo = $this->carro->modelo;
+        $this->marca = $this->carro->marca;
+        $this->status = $this->carro->status;
+        $this->ano = $this->carro->ano;
     }
 
-    public function store()
+    public function put()
     {
         $this->validate();
 
         $path = $this->imagem->store('carros', 'public');
 
-        $carro = new Carro;
+        $carro = $this->carro;
         $carro->modelo = $this->modelo;
         $carro->marca = $this->marca;
         $carro->status = $this->status;
@@ -39,7 +47,7 @@ new class extends Component {
         $carro->user_id = Auth::user()->id;
         $carro->save();
 
-        session()->flash('message', 'Carro cadastrado com sucesso!');
+        session()->flash('message', 'Veículo atualizado com sucesso!');
 
         return redirect()->to(route('dashboard'));
     }
@@ -73,7 +81,7 @@ new class extends Component {
 }; ?>
 
 <div>
-    <form enctype="multipart/form-data" wire:submit.prevent="store">
+    <form enctype="multipart/form-data" wire:submit.prevent="put">
         @csrf
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
