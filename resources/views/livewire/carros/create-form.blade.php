@@ -73,6 +73,15 @@ new class extends Component {
 }; ?>
 
 <div>
+
+    @if($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="mt-2 p-4 mb-2 text-sm text-red-800 rounded-lg bg-red-50 " role="alert">
+                <span class="font-medium">{{ $error }}</span>
+            </div>
+        @endforeach
+    @endif
+
     <form enctype="multipart/form-data" wire:submit.prevent="store">
         @csrf
         <div class="space-y-12">

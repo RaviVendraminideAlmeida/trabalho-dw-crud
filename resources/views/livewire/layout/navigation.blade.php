@@ -36,7 +36,9 @@ new class extends Component
                     <x-nav-link :href="route('carros.create')" :active="request()->routeIs('carros.create')" wire:navigate>
                         {{ __('Cadastrar Carro') }}
                     </x-nav-link>
-
+                    <x-nav-link :href="route('locacoes.show')" :active="request()->routeIs('locacoes.show')" wire:navigate>
+                        {{ __('Locações') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -91,7 +93,9 @@ new class extends Component
             <x-responsive-nav-link :href="route('carros.create')" :active="request()->routeIs('carros.create')" wire:navigate>
                 {{ __('Cadastrar Carro') }}
             </x-responsive-nav-link>
-
+            <x-responsive-nav-link :href="route('locacoes.show')" :active="request()->routeIs('locacoes.show')" wire:navigate>
+                {{ __('Locações') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

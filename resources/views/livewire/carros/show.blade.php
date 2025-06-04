@@ -27,7 +27,7 @@ new class extends Component {
     @if(count($carros) == 0)
         <div class="p-5 bg-white shadow-md rounded-md">
             <div>
-                <p class="text-lg">Nenhum carro cadastrado</p>
+                <p class="text-lg">nenhum carro cadastrado</p>
             </div>
         </div>
     @else
@@ -55,9 +55,11 @@ new class extends Component {
                                         Deletar
                                     </x-danger-button>
                                 @else
-                                    <x-secondary-button>
-                                        Alugar
-                                    </x-secondary-button>
+                                    <a href="{{ route('locacoes.create', ['id' => $carro->id]) }}">
+                                        <x-secondary-button>
+                                            Alugar
+                                        </x-secondary-button>
+                                    </a>
                                 @endif
                             </div>
                         </div>

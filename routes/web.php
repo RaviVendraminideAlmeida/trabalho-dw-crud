@@ -8,17 +8,24 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
 
-Route::view('carros/create', 'carros.create')
-    ->middleware(['auth'])
-    ->name('carros.create');
+Route::middleware(['auth'])->group(function() {
+    Route::view('profile', 'profile')
+        ->name('profile');
 
-Route::view('carros/edit/{id}', 'carros.edit')
-    ->middleware(['auth'])
-    ->name('carros.edit');
+    Route::view('carros/create', 'carros.create')
+        ->name('carros.create');
+    Route::view('carros/edit/{id}', 'carros.edit')
+        ->name('carros.edit');
+
+    Route::view('locacoes/create/{id}', 'locacoes.create')
+        ->name('locacoes.create');
+    Route::view('locacoes', 'locacoes.show')
+        ->name('locacoes.show');
+});
+
+
+
 
 
 require __DIR__ . '/auth.php';
