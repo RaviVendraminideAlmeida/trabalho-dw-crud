@@ -36,9 +36,14 @@ new class extends Component {
         $locacao = new Locacao;
         $locacao->taken = $this->dt_ini;
         $locacao->returned = $this->dt_fim;
+        $locacao->user_id = Auth::user()->id;
+        $locacao->carro_id = $this->carro->id;
         $locacao->obs = $this->obs;
 
         $locacao->save();
+
+
+
     }
 
     public function rules()
@@ -46,8 +51,7 @@ new class extends Component {
         return [
             'dt_ini' => [
                 'required', 'date', Rule::date()->todayOrAfter(),
-            ],
-            'dt_fim' => 'date|after:dt_ini'
+            ]
         ];
     }
 
