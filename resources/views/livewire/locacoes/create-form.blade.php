@@ -39,10 +39,15 @@ new class extends Component {
         $locacao->user_id = Auth::user()->id;
         $locacao->carro_id = $this->carro->id;
         $locacao->obs = $this->obs;
-
         $locacao->save();
 
+        $carro = Carro::find($locacao->carro_id);
+        $carro->status = 'Reservado';
+        $carro->save();
 
+        session()->flash('message', 'Locação realizada com sucesso');
+
+        return redirect()->to(route('locacoes.show'));
 
     }
 

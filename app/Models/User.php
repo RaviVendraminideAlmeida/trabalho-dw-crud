@@ -51,7 +51,10 @@ class User extends Authenticatable
     }
 
     public function carros() : BelongsToMany {
-        return $this->belongsToMany(Carro::class);
+        return $this
+            ->belongsToMany(Carro::class)
+            ->withPivot(['taken', 'returned'])
+            ->withTimestamps();
     }
 
 }
